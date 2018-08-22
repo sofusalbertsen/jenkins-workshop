@@ -3,7 +3,11 @@ node {
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository
 
-    checkout([$class: 'GitSCM', branches: [[name: '*/ready/**']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout'], pretestedIntegration(gitIntegrationStrategy: acumulate(), integrationBranch: 'master', repoName: 'origin')], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'sofusalbertsen', url: 'git@github.com:sofusalbertsen/jenkins-workshop.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: '*/ready/**']], 
+    doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout'], 
+    pretestedIntegration(gitIntegrationStrategy: accumulated(), integrationBranch: 'master', 
+    repoName: 'origin')], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'sofusalbertsen', 
+    url: 'git@github.com:sofusalbertsen/jenkins-workshop.git']]])
     //    git credentialsId: 'sofusalbertsen', url: 'git@github.com:sofusalbertsen/jenkins-workshop.git'
         // Get the Maven tool.
         // ** NOTE: This 'M3' Maven tool must be configured
