@@ -100,3 +100,4 @@ buildNumber.properties
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
 .vscode/settings.json
+?/.m2/repository/org/apache/maven/plugins/maven-site-plugin/3.3/maven-site-plugin-3.3.pom.lastUpdated
