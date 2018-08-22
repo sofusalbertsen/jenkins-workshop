@@ -24,18 +24,23 @@ node {
     }
     stage('Push'){
         pretestedIntegrationPublisher()
+
+          sh 'ls target'
         deleteDir()
     }
   }
   node {  
     stage('Javadoc'){
           unstash 'repo'
+          unstash 'build-result'
+
           sh 'ls'
+          sh 'ls target'
+          
           sh 'docker run -u "$(id -u):$(id -g)" -v maven-repo:/root/.m2 -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn site'
         //    archive 'target/site/*'
     }
     stage('Results') {
-            unstash 'build-result'
             sh 'ls'
             junit '**/target/surefire-reports/TEST-*.xml'
             archiveArtifacts 'target/*.jar'
