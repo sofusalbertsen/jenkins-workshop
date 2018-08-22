@@ -18,7 +18,8 @@ public class GildedRoseTest {
         Item[] items = new Item[] { new Item("Aged Brie", 0, 1) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals(1, app.items[0].quality);
+        assertTrue("brie is a higher quality",app.items[0].quality<1 );
+        
     }
 
 }
