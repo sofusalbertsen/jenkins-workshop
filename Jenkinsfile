@@ -28,8 +28,8 @@ node {
           sh 'ls target'
         deleteDir()
     }
-  }
-  node {  
+  //}
+  //node {  
     stage('Javadoc'){
           unstash 'repo'
           unstash 'build-result'
