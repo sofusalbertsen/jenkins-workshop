@@ -11,11 +11,7 @@ node {
     repoName: 'origin')], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'sofusalbertsen', 
     url: 'git@github.com:sofusalbertsen/jenkins-workshop.git']]])
     
-    stash name: "repo", includes: "**", excludes: "**/.git,**/.git/*", useDefaultExcludes: false
-
-    sh 'ls'
-
-    sh 'ls'
+    stash name: "repo", includes: "**", useDefaultExcludes: false
     }
     
     stage('Build') {
@@ -23,13 +19,16 @@ node {
         if (isUnix()) {
            sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn clean test install'
             //sh "mvn -Dmaven.test.failure.ignore clean package"
-           
         }
     }
     stage('Push'){
         pretestedIntegrationPublisher()
+        deleteDir()
     }
+  }
+  node {  
     stage('Javadoc'){
+          unstash 'repo'
           sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn site'
         //    archive 'target/site/*'
     }
