@@ -28,9 +28,6 @@ node {
     }
     stage('Push'){
         pretestedIntegrationPublisher()
-    when {
-        branch 'master'  //only run these steps on the master branch
-} steps {sh 'im on master'}
     }
     stage('Javadoc'){
           sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn clean site'
