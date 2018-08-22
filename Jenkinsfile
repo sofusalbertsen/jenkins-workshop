@@ -21,7 +21,7 @@ node {
     stage('Build') {
         // Run the maven build
         if (isUnix()) {
-           sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn clean install'
+           sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn clean test install'
             //sh "mvn -Dmaven.test.failure.ignore clean package"
            
         }
@@ -30,7 +30,7 @@ node {
         pretestedIntegrationPublisher()
     }
     stage('Javadoc'){
-          sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn clean site'
+          sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn site'
         //    archive 'target/site/*'
     }
     stage('Results') {
