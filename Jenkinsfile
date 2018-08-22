@@ -25,7 +25,7 @@ node {
     stage('Push'){
         pretestedIntegrationPublisher()
 
-          sh 'ls target'
+        sh 'ls target'
         deleteDir()
     }
   //}
@@ -37,7 +37,7 @@ node {
           sh 'ls'
           sh 'ls target'
           
-          sh 'docker run -u "$(id -u):$(id -g)" -v maven-repo:/root/.m2 -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn site'
+          //sh 'docker run -u "$(id -u):$(id -g)" -v maven-repo:/root/.m2 -v $PWD:/usr/src/mymaven -w /usr/src/mymaven --rm maven:3-jdk-8 mvn site'
         //    archive 'target/site/*'
     }
     stage('Results') {
